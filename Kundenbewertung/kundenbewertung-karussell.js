@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
   const carousel = document.querySelector('.kundenbewertung-karussell');
   if (!carousel) return;

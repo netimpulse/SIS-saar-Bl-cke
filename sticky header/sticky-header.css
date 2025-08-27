@@ -1,6 +1,6 @@
 /* Sticky (fixed) Header – bleibt immer sichtbar */
 .custom-header-section {
-  position: fixed;           /* <— statt sticky */
+  position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
   width: 100%;
@@ -9,7 +9,6 @@
   will-change: transform;
 }
 
-/* Mindesthöhe = berechnete Header-Höhe */
 .custom-header__container {
   max-width: 1200px;
   margin: 0 auto;
@@ -18,12 +17,14 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  min-height: var(--header-height);
+  min-height: var(--header-min-height);
 }
 
-/* Spacer unter dem Header, damit der Content nicht verdeckt wird */
-.sticky-spacer {
-  height: var(--header-height);
+/* Gruppe für Logo + Zurück-Pfeil */
+.custom-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Abstand Logo <-> Back */
 }
 
 .custom-header__logo {
@@ -35,6 +36,29 @@
 .custom-header__logo-img { height: var(--logo-height); width: auto; }
 .custom-header__logo-text { font-weight: 700; text-decoration: none; }
 
+/* Zurück-Pfeil jetzt inline */
+.custom-header__back {
+  position: static;
+  transform: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  line-height: 1;
+  color: var(--back-text-color);
+  font-size: var(--back-font-size);
+  font-family: var(--back-font-family);
+  font-style: var(--back-font-style);
+  font-weight: var(--back-font-weight);
+  transition: color .3s ease, transform .2s ease;
+}
+.custom-header__back:hover {
+  color: var(--back-hover-color);
+  transform: translateY(-1px);
+}
+.custom-header__back-icon { width: 1em; height: 1em; flex: 0 0 auto; }
+
+/* Navigation */
 .custom-header__nav-wrapper {
   display: flex; align-items: center; gap: 1.5rem;
   transform: translate(var(--menu-pos-x), var(--menu-pos-y));
@@ -75,28 +99,9 @@
 .custom-header__mobile-toggle { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:8px; }
 .custom-header__mobile-toggle span { width:24px; height:2px; background:var(--nav-text-color); transition:all .3s ease; }
 
-/* Zurück-Pfeil */
-.custom-header__back {
-  position:absolute; left:var(--padding-horizontal); top:50%;
-  transform: translate(var(--back-pos-x), calc(-50% + var(--back-pos-y)));
-  display:inline-flex; align-items:center; gap:.5rem;
-  text-decoration:none; line-height:1; z-index:60;
-  color:var(--back-text-color); font-size:var(--back-font-size);
-  font-family:var(--back-font-family); font-style:var(--back-font-style); font-weight:var(--back-font-weight);
-  transition: color .3s ease, transform .2s ease;
-}
-.custom-header__back:hover {
-  color:var(--back-hover-color);
-  transform: translate(var(--back-pos-x), calc(-50% + var(--back-pos-y))) translateY(-1px);
-}
-.custom-header__back-icon { width:1em; height:1em; flex:0 0 auto; }
-
 /* Responsive */
 @media (max-width: 990px){
   .custom-header__nav-wrapper{ display:none; }
   .custom-header__mobile-toggle{ display:flex; }
   .custom-header__logo, .custom-header__nav-wrapper{ transform:none !important; }
-}
-@media (max-width: 480px){
-  .custom-header__back{ left:12px; }
 }

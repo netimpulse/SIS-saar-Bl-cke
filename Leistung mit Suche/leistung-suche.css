@@ -9,9 +9,17 @@
 
 .services-grid__inner { padding: 24px 0; }
 
-.services-grid__header { text-align: center; margin-bottom: 20px; }
-.services-grid__title { margin: 0 0 6px; font-size: clamp(22px, 2.2vw, 36px); }
-.services-grid__subtitle { margin: 0; opacity: .8; }
+/* Ausrichtungsklassen */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Header */
+.services-grid__header { margin-bottom: 20px; }
+.services-grid__title { font-size: clamp(22px, 2.2vw, 36px); font-weight: 700; }
+.services-grid__title p { margin: 0; }
+.services-grid__subtitle { opacity: .8; }
+.services-grid__subtitle p { margin: 0; }
 
 /* Suche */
 .services-grid__search {
@@ -28,6 +36,14 @@
   outline: none;
   background: #fff;
 }
+
+/* Entfernt das Standard-X vom Browser (Chrome, Edge, Safari) */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
 .services-grid__search-input:focus { box-shadow: 0 0 0 3px rgba(38,132,255,.18); }
 .services-grid__clear {
   position: absolute;
@@ -49,12 +65,11 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap);
-  justify-content: center; /* zentriert letzte Reihe (z. B. 2 Elemente) */
+  justify-content: center;
 }
 .services-grid[data-columns="2"] {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
 @media (max-width: 990px) {
   .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .services-grid[data-columns="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -89,15 +104,21 @@
   height: 100%;
   background: linear-gradient(135deg, #f1f1f1, #e7e7e7);
 }
+
 .service-card__body {
   padding: 18px;
   display: grid;
   gap: 10px;
 }
-.service-card__title { margin: 0; font-size: 20px; }
-.service-card__text { margin: 0; opacity: .85; }
 
-/* Tags */
+/* Richtext in Karten */
+.service-card__title { font-size: 20px; font-weight: 700; }
+.service-card__title p { margin: 0; }
+.service-card__text { opacity: .9; }
+.service-card__text p { margin: 0 0 0.5em; }
+.service-card__text ul,
+.service-card__text ol { margin: 0.25em 0 0.5em 1.2em; }
+
 .service-card__tags {
   list-style: none;
   margin: 2px 0 6px;
@@ -123,7 +144,7 @@
   border: 1px solid var(--badge-bg);
 }
 
-/* Buttons (Fallback – überschreibt dein Theme nicht aggressiv) */
+/* Buttons (Fallback) */
 .btn {
   display: inline-flex;
   align-items: center;

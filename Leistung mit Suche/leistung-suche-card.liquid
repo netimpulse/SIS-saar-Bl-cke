@@ -1,13 +1,12 @@
 {% comment %}
   Snippet: Leistung Suche Card
-  Erwartete Variablen:
-  - id, image, title, text, keywords, button_label, button_link
-  - badge_style (solid|outline), button_style
+  - nutzt Richtext für Titel & Text
+  - Suche basiert auf plain text (HTML wird entfernt)
 {% endcomment %}
 
 {%- assign keywords_list = keywords | default: '' | split: ',' -%}
 {%- capture haystack -%}
-  {{ title | downcase }} {% for kw in keywords_list %} {{ kw | strip | downcase }} {% endfor %}
+  {{ title_html | strip_html | downcase }} {% for kw in keywords_list %} {{ kw | strip | downcase }} {% endfor %}
 {%- endcapture -%}
 
 <article
@@ -20,7 +19,7 @@
     {% if image != blank %}
       <img
         src="{{ image | image_url: width: 800 }}"
-        alt="{{ image.alt | escape | default: title }}"
+        alt="{{ image.alt | escape | default: title_html | strip_html }}"
         loading="lazy"
         width="{{ image.width }}"
         height="{{ image.height }}"
@@ -31,12 +30,12 @@
   </div>
 
   <div class="service-card__body">
-    {% if title != blank %}
-      <h3 class="service-card__title">{{ title }}</h3>
+    {% if title_html != blank %}
+      <div class="service-card__title">{{ title_html }}</div>
     {% endif %}
 
-    {% if text != blank %}
-      <p class="service-card__text">{{ text }}</p>
+    {% if text_html != blank %}
+      <div class="service-card__text">{{ text_html }}</div>
     {% endif %}
 
     {% if keywords_list.size > 0 and keywords_list.first != blank %}
